@@ -20,20 +20,20 @@ public class Switch : StateMachineBehaviour
         {
             if (stateInfo.speed > 0)
             {
-                if (!animator.GetComponent<Test>().PistolHand.activeSelf &&
+                if (!animator.GetComponent<Player>().PistolHand.activeSelf &&
                      stateInfo.normalizedTime / stateInfo.length > 0.05)
                 {
-                    animator.GetComponent<Test>().PistolBack.SetActive(false);
-                    animator.GetComponent<Test>().PistolHand.SetActive(true);
+                    animator.GetComponent<Player>().PistolBack.SetActive(false);
+                    animator.GetComponent<Player>().PistolHand.SetActive(true);
                 }
             }
             else
             {
-                if (!animator.GetComponent<Test>().PistolBack.activeSelf &&
+                if (!animator.GetComponent<Player>().PistolBack.activeSelf &&
                      stateInfo.normalizedTime / stateInfo.length > 0.95)
                 {
-                    animator.GetComponent<Test>().PistolBack.SetActive(true);
-                    animator.GetComponent<Test>().PistolHand.SetActive(false);
+                    animator.GetComponent<Player>().PistolBack.SetActive(true);
+                    animator.GetComponent<Player>().PistolHand.SetActive(false);
                 }
             }
         }
@@ -41,20 +41,20 @@ public class Switch : StateMachineBehaviour
         {
             if (stateInfo.speed > 0)
             {
-                if (!animator.GetComponent<Test>().AKHand.activeSelf &&
+                if (!animator.GetComponent<Player>().AKHand.activeSelf &&
                      stateInfo.normalizedTime / stateInfo.length > 0.30)
                 {
-                    animator.GetComponent<Test>().AKBack.SetActive(false);
-                    animator.GetComponent<Test>().AKHand.SetActive(true);
+                    animator.GetComponent<Player>().AKBack.SetActive(false);
+                    animator.GetComponent<Player>().AKHand.SetActive(true);
                 }
             }
             else
             {
-                if (!animator.GetComponent<Test>().AKBack.activeSelf &&
+                if (!animator.GetComponent<Player>().AKBack.activeSelf &&
                      stateInfo.normalizedTime / stateInfo.length > 0.70)
                 {
-                    animator.GetComponent<Test>().AKBack.SetActive(true);
-                    animator.GetComponent<Test>().AKHand.SetActive(false);
+                    animator.GetComponent<Player>().AKBack.SetActive(true);
+                    animator.GetComponent<Player>().AKHand.SetActive(false);
                 }
             }
         }
@@ -67,26 +67,26 @@ public class Switch : StateMachineBehaviour
         {
             if (stateInfo.speed > 0)
             {
-                animator.GetComponent<Test>().PistolBack.SetActive(false);
-                animator.GetComponent<Test>().PistolHand.SetActive(true);
+                animator.GetComponent<Player>().PistolBack.SetActive(false);
+                animator.GetComponent<Player>().PistolHand.SetActive(true);
             }
             else
             {
-                animator.GetComponent<Test>().PistolBack.SetActive(true);
-                animator.GetComponent<Test>().PistolHand.SetActive(false);
+                animator.GetComponent<Player>().PistolBack.SetActive(true);
+                animator.GetComponent<Player>().PistolHand.SetActive(false);
             }
         }
         else
         {
             if (stateInfo.speed > 0)
             {
-                animator.GetComponent<Test>().AKBack.SetActive(false);
-                animator.GetComponent<Test>().AKHand.SetActive(true);
+                animator.GetComponent<Player>().AKBack.SetActive(false);
+                animator.GetComponent<Player>().AKHand.SetActive(true);
             }
             else
             {
-                animator.GetComponent<Test>().AKBack.SetActive(true);
-                animator.GetComponent<Test>().AKHand.SetActive(false);
+                animator.GetComponent<Player>().AKBack.SetActive(true);
+                animator.GetComponent<Player>().AKHand.SetActive(false);
             }
         }
     }
