@@ -15,9 +15,13 @@ public class Player : MonoBehaviour
         public float RunX;
         public float RunZ;
         public bool Jump;
+
+        public bool SwitchToAK;
+        public bool SwitchToPistol;
+        public bool Shoot;
     }
 
-    public const float Speed = 10f;
+    public float Speed = 10f;
     public const float JumpForce = 7f;
 
     protected Rigidbody Rigidbody;
@@ -54,23 +58,26 @@ public class Player : MonoBehaviour
 
         transform.rotation = LookRotation;
 
+        var forwardP = Vector3.Project(Rigidbody.velocity, transform.forward);
+        Animator.SetFloat("SpeedForward", forwardP.magnitude * Mathf.Sign(forwardP.z));
+        var rightP = Vector3.Project(Rigidbody.velocity, transform.right);
+        Animator.SetFloat("SpeedSideward", rightP.magnitude * Mathf.Sign(rightP.x));
 
-        Animator.SetFloat("SpeedForward", Vector3.Project(Rigidbody.velocity, transform.forward).magnitude);
-        Animator.SetFloat("SpeedSideward", Vector3.Project(Rigidbody.velocity, transform.right).magnitude);
-
-        if (UnityEngine.Input.GetMouseButton(0))
+        if (Input.Shoot)
         {
             Animator.SetTrigger("Shoot");
         }
 
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.SwitchToAK)
         {
+            Input.SwitchToAK = false;
             Animator.SetBool("AK", true);
             Animator.SetBool("Pistol", false);
         }
 
-        if (UnityEngine.Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.SwitchToPistol)
         {
+            Input.SwitchToPistol = false;
             Animator.SetBool("AK", false);
             Animator.SetBool("Pistol", true);
         }

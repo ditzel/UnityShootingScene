@@ -44,12 +44,18 @@ public class Controller : MonoBehaviour
         var runDirection = characterForward * (Input.GetAxisRaw("Vertical") ) + characterLeft * (Input.GetAxisRaw("Horizontal"));
         LookDirection = Quaternion.AngleAxis(InputRotationY, characterLeft) * characterForward;
 
+
         //set player values
         Player.Input.RunX = runDirection.x;
         Player.Input.RunZ = runDirection.z;
         Player.Input.LookX = LookDirection.x;
         Player.Input.LookZ = LookDirection.z;
-
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            Player.Input.SwitchToAK = true;
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            Player.Input.SwitchToPistol = true;
+        Player.Input.Shoot = Input.GetMouseButtonDown(0);
+        
         CharacterPivot = Quaternion.AngleAxis(InputRotationX, Vector3.up) * CameraPivot;
     }
 
