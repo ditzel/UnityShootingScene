@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
         Vector2 mouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
@@ -54,7 +54,18 @@ public class Controller : MonoBehaviour
             Player.Input.SwitchToAK = true;
         if (Input.GetKeyDown(KeyCode.Alpha2))
             Player.Input.SwitchToPistol = true;
-        Player.Input.Shoot = Input.GetMouseButtonDown(0);
+        Player.Input.Shoot = Input.GetMouseButton(0);
+
+        RaycastHit hitInfo = new RaycastHit();
+        gameObject.layer = Physics.IgnoreRaycastLayer;
+        int j = Physics.DefaultRaycastLayers;
+        if (Physics.Raycast(Camera.main.transform.position,Camera.main.transform.forward, out hitInfo, Player.AllButIgnoreLayer))
+            Player.Input.ShootTarget = hitInfo.point;
+        else
+            Player.Input.ShootTarget = Vector3.up * 1000f;
+        gameObject.layer = 0;
+
+        Debug.DrawLine(transform.position + Vector3.up * 1.5f, Player.Input.ShootTarget, Color.magenta);
         
         CharacterPivot = Quaternion.AngleAxis(InputRotationX, Vector3.up) * CameraPivot;
     }
