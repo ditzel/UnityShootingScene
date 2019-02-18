@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    public Enemy EnemyGoal;
+
+    public bool Occupied { get { return EnemyGoal != null && EnemyGoal.target == this; } }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

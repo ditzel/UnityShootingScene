@@ -87,10 +87,6 @@ public class Player : MonoBehaviour
         if (IsDead)
             return;
 
-        var charVelo = Quaternion.Inverse(transform.rotation) * Rigidbody.velocity;
-        Animator.SetFloat("SpeedForward", charVelo.z);
-        Animator.SetFloat("SpeedSideward", charVelo.x * Mathf.Sign(charVelo.z + 0.1f));
-
         Cooldown -= Time.deltaTime;
 
         if (Input.Shoot || Debug)
@@ -123,7 +119,7 @@ public class Player : MonoBehaviour
                 gameObject.layer = Physics.IgnoreRaycastLayer;
                 if (Physics.SphereCast(shootRay, 0.1f, out hitInfo, Player.AllButIgnoreLayer))
                 {
-                    UnityEngine.Debug.DrawLine(shootRay.origin, shootRay.origin + hitInfo.point, Color.red);
+                    UnityEngine.Debug.DrawLine(shootRay.origin, hitInfo.point, Color.red);
 
                     var player = hitInfo.collider.GetComponent<Player>();
                     if (player != null && !Debug && player != this)
@@ -136,6 +132,11 @@ public class Player : MonoBehaviour
 
             }
         }
+
+
+        var charVelo = Quaternion.Inverse(transform.rotation) * Rigidbody.velocity;
+        Animator.SetFloat("SpeedForward", charVelo.z);
+        Animator.SetFloat("SpeedSideward", charVelo.x * Mathf.Sign(charVelo.z + 0.1f));
 
         if (Input.SwitchToAK)
         {

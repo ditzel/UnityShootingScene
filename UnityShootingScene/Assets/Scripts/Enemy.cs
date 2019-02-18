@@ -12,7 +12,8 @@ public class Enemy : MonoBehaviour
     protected NavMeshAgent Agent;
     protected StateEnum State;
     protected Target[] PotentialTargets;
-    protected Target target;
+    [HideInInspector]
+    public Target target;
     protected float NextState;
     public bool DontShoot;
 
@@ -62,7 +63,11 @@ public class Enemy : MonoBehaviour
                 if (NextState < 0)
                 {
                     State = StateEnum.RUN;
-                    target = PotentialTargets[Random.Range(0, PotentialTargets.Length)];
+                    var targetIndex = Random.Range(0, PotentialTargets.Length);
+                    for(var i = 0; i < PotentialTargets.Length && PotentialTargets[targetIndex].Occupied; i++)
+                        targetIndex = (targetIndex + 1) % PotentialTargets.Length;
+                    target = PotentialTargets[targetIndex];
+                    target.EnemyGoal = this;
                     Agent.SetDestination(target.transform.position);
                 }
                 break;
